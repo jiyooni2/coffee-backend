@@ -1,11 +1,9 @@
 require("dotenv").config();
 import { ApolloServer } from "apollo-server";
-import resolvers from "./videos/videos.resolvers";
-import typeDefs from "./videos/videos.typeDefs";
+import schema from "./schema";
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
 });
 
 const PORT = process.env.PORT;
