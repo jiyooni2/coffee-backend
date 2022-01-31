@@ -1,8 +1,8 @@
 import { gql } from "apollo-server";
 
-const typeDefs = gql`
+export default gql`
   type User {
-    id: Int!
+    id: String!
     username: String!
     email: String!
     name: String!
@@ -10,28 +10,9 @@ const typeDefs = gql`
     password: String!
     avatarURL: String
     githubUsername: String
-  }
-
-  type result {
-    ok: Boolean!
-    error: String
-  }
-
-  type Query {
-    seeUser(username: String): User
-  }
-
-  type Mutation {
-    createAccount(
-      username: String!
-      email: String!
-      name: String!
-      location: String!
-      password: String!
-      avatarURL: String
-      githubUsername: String
-    ): result
+    followers: [User]
+    following: [User]
+    totalFollowing: Int!
+    totalFollowers: Int!
   }
 `;
-
-export default typeDefs;
