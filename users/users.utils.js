@@ -26,5 +26,6 @@ export const protectedResolver =
         error: "Please log in to perform this action.",
       };
     }
+    console.log("login complete");
     return ourResolver(root, args, context, info);
   };

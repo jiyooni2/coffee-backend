@@ -10,16 +10,43 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id  Int @id @default(autoincrement()) @unique
-  username  String  @unique
-  email String  @unique
-  name  String
-  location  String
-  password  String
-  avatarURL String?
-  githubUsername  String?
-  followers User[]  @relation("FollowRelation",references: [id])
-  following User[]  @relation("FollowRelation",references: [id])
-  
+model User {
+  id             Int          @id @unique @default(autoincrement())
+  username       String       @unique
+  email          String       @unique
+  name           String
+  location       String
+  password       String
+  avatarURL      String?
+  githubUsername String?
+  followers      User[]       @relation("FollowRelation", references: [id])
+  following      User[]       @relation("FollowRelation", references: [id])
+  CoffeeShop     CoffeeShop[]
+}
+
+model CoffeeShop {
+  id         Int               @id @unique @default(autoincrement())
+  name       String
+  latitude   String
+  longitude  String
+  photos     CoffeeShopPhoto[]
+  categories Category[]
+  user       User              @relation(fields: [userId], references: [id])
+  userId     Int
+
+  @@unique([latitude, longitude])
+}
+
+model Category {
+  id    Int          @id @unique @default(autoincrement())
+  name  String       @unique
+  slug  String?      @unique
+  shops CoffeeShop[]
+}
+
+model CoffeeShopPhoto {
+  id           Int        @id @unique @default(autoincrement())
+  url          String     @unique
+  shop         CoffeeShop @relation(fields: [coffeeShopId], references: [id])
+  coffeeShopId Int
 }
