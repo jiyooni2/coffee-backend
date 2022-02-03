@@ -4,9 +4,11 @@
   "description": "kjy2390",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node server.js",
+    "dev": "nodemon --exec babel-node src/server.js",
     "migrate": "npx prisma migrate dev",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "build": "babel src --out-dir build",
+    "start": "node build/server"
   },
   "repository": {
     "type": "git",
@@ -19,12 +21,14 @@
   },
   "homepage": "https://github.com/kjy5657/nomadcoffee-backend#readme",
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@graphql-tools/load-files": "^6.5.3",
     "@graphql-tools/merge": "^8.2.1",
     "@graphql-tools/schema": "^8.3.1",
     "@prisma/client": "^3.8.1",
     "apollo-server": "^3.6.2",
     "apollo-server-express": "^3.6.2",
+    "babel-cli": "^6.26.0",
     "bcrypt": "^5.0.1",
     "express": "^4.17.2",
     "graphql-upload": "^13.0.0",
@@ -32,6 +36,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.17.0",
     "@babel/core": "^7.16.12",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",

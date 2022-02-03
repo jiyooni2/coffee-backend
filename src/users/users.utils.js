@@ -13,7 +13,8 @@ export const getUser = async (token) => {
     } else {
       return null;
     }
-  } catch {
+  } catch (e) {
+    console.log(e);
     return null;
   }
 };

@@ -33,16 +33,18 @@ export default {
             latitude,
             longitude,
             user: { connect: { id: loggedInUser.id } },
-            ...(categoryObj && {
-              categories: {
-                connectOrCreate: categoryObj,
-              },
-            }),
-            ...(photoObj && {
-              photos: {
-                connectOrCreate: photoObj,
-              },
-            }),
+
+            categories: categoryObj
+              ? {
+                  connectOrCreate: categoryObj,
+                }
+              : undefined,
+
+            photos: photoObj
+              ? {
+                  connectOrCreate: photoObj,
+                }
+              : undefined,
           },
         });
 

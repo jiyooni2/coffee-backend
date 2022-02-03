@@ -41,18 +41,20 @@ export default {
             name,
             latitude,
             longitude,
-            ...(categoryObj && {
-              categories: {
-                disconnect: coffeeShop.categories,
-                connectOrCreate: categoryObj,
-              },
-            }),
-            ...(photoObj && {
-              photos: {
-                disconnect: coffeeShop.photos,
-                connectOrCreate: photoObj,
-              },
-            }),
+
+            categories: categoryObj
+              ? {
+                  disconnect: coffeeShop.categories,
+                  connectOrCreate: categoryObj,
+                }
+              : undefined,
+
+            photos: photoObj
+              ? {
+                  disconnect: coffeeShop.photos,
+                  connectOrCreate: photoObj,
+                }
+              : undefined,
           },
         });
 

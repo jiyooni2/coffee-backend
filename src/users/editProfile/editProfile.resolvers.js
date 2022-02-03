@@ -46,8 +46,8 @@ export default {
             email,
             name,
             location,
-            ...(uglyPassword && { password: uglyPassword }),
-            ...(avatarUrl && { avatarUrl }),
+            password: uglyPassword ? uglyPassword : undefined,
+            avatarUrl: avatarUrl ? avatarUrl : undefined,
             githubUsername,
           },
         });
