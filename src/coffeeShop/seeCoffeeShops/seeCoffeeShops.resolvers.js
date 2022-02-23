@@ -1,10 +1,10 @@
 import client from "../../client";
 export default {
   Query: {
-    seeCoffeeShops: (_, { page }) => {
+    seeCoffeeShops: (_, { offset }) => {
       return client.coffeeShop.findMany({
-        take: 5,
-        skip: (page - 1) * 5,
+        take: 2,
+        skip: offset,
       });
     },
   },

@@ -14,5 +14,15 @@ export default {
         where: { shop: { id } },
       });
     },
+    categories: ({ id }) => {
+      return client.category.findMany({
+        where: { shops: { some: { id } } },
+      });
+    },
+    user: ({ userId }) => {
+      return client.user.findUnique({
+        where: { id: userId },
+      });
+    },
   },
 };
