@@ -17,7 +17,7 @@ model User {
   name           String
   location       String
   password       String
-  avatarURL      String?
+  avatarUrl      String?
   githubUsername String?
   followers      User[]       @relation("FollowRelation", references: [id])
   following      User[]       @relation("FollowRelation", references: [id])

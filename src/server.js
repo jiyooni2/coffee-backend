@@ -23,6 +23,7 @@ const apollo = new ApolloServer({
 const app = express();
 app.use(logger("dev"));
 app.use("static", express.static("uploads"));
+app.use(graphqlUploadExpress());
 
 apollo.start().then(() => {
   apollo.applyMiddleware({ app, path: "/graphql" });

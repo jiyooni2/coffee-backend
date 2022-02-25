@@ -21,13 +21,12 @@ export const getUser = async (token) => {
 
 export const protectedResolver =
   (ourResolver) => (root, args, context, info) => {
-    console.log(context.loggedInUser);
     if (!context.loggedInUser) {
       return {
         ok: false,
         error: "Please log in to perform this action.",
       };
     }
-    console.log("login complete");
+    console.log("auth complete");
     return ourResolver(root, args, context, info);
   };

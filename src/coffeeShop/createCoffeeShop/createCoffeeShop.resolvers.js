@@ -1,12 +1,13 @@
 import client from "../../client";
 import { protectedResolver } from "../../users/users.utils";
+import { uploadToS3 } from "./../../../shared/shared.utils";
 
 export default {
   Mutation: {
     createCoffeeShop: protectedResolver(
       async (
         _,
-        { name, latitude, longitude, category, url },
+        { name, latitude, longitude, category, photo },
         { loggedInUser }
       ) => {
         let categoryObj;
@@ -18,13 +19,10 @@ export default {
           }));
         }
 
-        let photoObj;
-        if (url) {
-          const photos = url.split(",").map((item) => item.trim());
-          photoObj = photos.map((photo) => ({
-            where: { url: photo },
-            create: { url: photo },
-          }));
+        let url;
+        if (photo) {
+          url = await uploadToS3(photo, loggedInUser.id, "uploads");
+          console.log(url);
         }
 
         const shop = await client.coffeeShop.create({
@@ -33,18 +31,18 @@ export default {
             latitude,
             longitude,
             user: { connect: { id: loggedInUser.id } },
-
             categories: categoryObj
               ? {
                   connectOrCreate: categoryObj,
                 }
               : undefined,
 
-            photos: photoObj
-              ? {
-                  connectOrCreate: photoObj,
-                }
-              : undefined,
+            //생성과 동시에 connect
+            photos: {
+              create: {
+                url,
+              },
+            },
           },
         });
 
