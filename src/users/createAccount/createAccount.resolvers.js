@@ -18,6 +18,8 @@ export default {
 
         const user = await client.user.create({
           data: {
+            avatarUrl:
+              "https://nomadcoffee-uploader.s3.ap-northeast-2.amazonaws.com/profile.png",
             username,
             email,
             name,
