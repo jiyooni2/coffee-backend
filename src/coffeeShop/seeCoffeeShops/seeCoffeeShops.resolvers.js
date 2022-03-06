@@ -5,7 +5,7 @@ export default {
       return client.coffeeShop.findMany({
         take: 2,
         skip: offset,
-        orderBy: { createdAt: "desc" },
+        orderBy: { id: "desc" },
       });
     },
   },
