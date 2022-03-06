@@ -28,6 +28,7 @@ var _default = {
               case 0:
                 name = _ref.name, latitude = _ref.latitude, longitude = _ref.longitude, category = _ref.category, photo = _ref.photo;
                 loggedInUser = _ref2.loggedInUser;
+                console.log(name, latitude, longitude, category, photo);
 
                 if (category) {
                   categories = category.split(",").map(function (item) {
@@ -46,19 +47,19 @@ var _default = {
                 }
 
                 if (!photo) {
-                  _context.next = 8;
+                  _context.next = 9;
                   break;
                 }
 
-                _context.next = 6;
+                _context.next = 7;
                 return (0, _shared.uploadToS3)(photo, loggedInUser.id, "uploads");
 
-              case 6:
+              case 7:
                 url = _context.sent;
                 console.log(url);
 
-              case 8:
-                _context.next = 10;
+              case 9:
+                _context.next = 11;
                 return _client["default"].coffeeShop.create({
                   data: {
                     name: name,
@@ -81,13 +82,13 @@ var _default = {
                   }
                 });
 
-              case 10:
+              case 11:
                 shop = _context.sent;
                 return _context.abrupt("return", {
                   ok: true
                 });
 
-              case 12:
+              case 13:
               case "end":
                 return _context.stop();
             }

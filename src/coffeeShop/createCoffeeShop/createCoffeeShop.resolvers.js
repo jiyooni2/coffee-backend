@@ -10,6 +10,8 @@ export default {
         { name, latitude, longitude, category, photo },
         { loggedInUser }
       ) => {
+        console.log(name, latitude, longitude, category, photo);
+
         let categoryObj;
         if (category) {
           const categories = category.split(",").map((item) => item.trim());
