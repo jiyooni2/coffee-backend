@@ -15,16 +15,18 @@ var _client = _interopRequireDefault(require("../../client"));
 
 var _users = require("../../users/users.utils");
 
+var _shared = require("../../shared/shared.utils");
+
 var _default = {
   Mutation: {
     createCoffeeShop: (0, _users.protectedResolver)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var name, latitude, longitude, category, url, loggedInUser, categoryObj, categories, photoObj, photos, shop;
+        var name, latitude, longitude, category, photo, loggedInUser, categoryObj, categories, url, shop;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                name = _ref.name, latitude = _ref.latitude, longitude = _ref.longitude, category = _ref.category, url = _ref.url;
+                name = _ref.name, latitude = _ref.latitude, longitude = _ref.longitude, category = _ref.category, photo = _ref.photo;
                 loggedInUser = _ref2.loggedInUser;
 
                 if (category) {
@@ -43,23 +45,20 @@ var _default = {
                   });
                 }
 
-                if (url) {
-                  photos = url.split(",").map(function (item) {
-                    return item.trim();
-                  });
-                  photoObj = photos.map(function (photo) {
-                    return {
-                      where: {
-                        url: photo
-                      },
-                      create: {
-                        url: photo
-                      }
-                    };
-                  });
+                if (!photo) {
+                  _context.next = 8;
+                  break;
                 }
 
                 _context.next = 6;
+                return (0, _shared.uploadToS3)(photo, loggedInUser.id, "uploads");
+
+              case 6:
+                url = _context.sent;
+                console.log(url);
+
+              case 8:
+                _context.next = 10;
                 return _client["default"].coffeeShop.create({
                   data: {
                     name: name,
@@ -73,17 +72,22 @@ var _default = {
                     categories: categoryObj ? {
                       connectOrCreate: categoryObj
                     } : undefined,
-                    photos: photoObj ? {
-                      connectOrCreate: photoObj
-                    } : undefined
+                    //생성과 동시에 connect
+                    photos: {
+                      create: {
+                        url: url
+                      }
+                    }
                   }
                 });
 
-              case 6:
+              case 10:
                 shop = _context.sent;
-                return _context.abrupt("return", shop);
+                return _context.abrupt("return", {
+                  ok: true
+                });
 
-              case 8:
+              case 12:
               case "end":
                 return _context.stop();
             }

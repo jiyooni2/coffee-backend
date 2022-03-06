@@ -12,10 +12,10 @@ var _client = _interopRequireDefault(require("./../../client"));
 var _default = {
   Query: {
     seeCategories: function seeCategories(_, _ref) {
-      var page = _ref.page;
+      var offset = _ref.offset;
       return _client["default"].category.findMany({
-        take: 5,
-        skip: (page - 1) * 5
+        take: 10,
+        skip: offset
       });
     }
   }

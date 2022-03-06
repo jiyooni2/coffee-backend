@@ -13,6 +13,6 @@ var _apolloServer = require("apollo-server");
 
 var _templateObject;
 
-var _default = (0, _apolloServer.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type User {\n    id: String!\n    username: String!\n    email: String!\n    name: String!\n    location: String!\n    password: String!\n    avatarURL: String\n    githubUsername: String\n    followers: [User]\n    following: [User]\n    totalFollowing: Int!\n    totalFollowers: Int!\n  }\n"])));
+var _default = (0, _apolloServer.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type User {\n    id: String!\n    username: String!\n    email: String!\n    name: String!\n    location: String!\n    password: String!\n    avatarUrl: String\n    githubUsername: String\n    followers: [User]\n    following: [User]\n    totalFollowing: Int!\n    totalFollowers: Int!\n  }\n"])));
 
 exports["default"] = _default;

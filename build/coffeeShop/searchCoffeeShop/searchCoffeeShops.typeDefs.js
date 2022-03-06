@@ -13,6 +13,6 @@ var _apolloServerExpress = require("apollo-server-express");
 
 var _templateObject;
 
-var _default = (0, _apolloServerExpress.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Query {\n    seeCoffeeShops(offset: Int!): [CoffeeShop]\n  }\n"])));
+var _default = (0, _apolloServerExpress.gql)(_templateObject || (_templateObject = (0, _taggedTemplateLiteral2["default"])(["\n  type Query {\n    searchCoffeeShops(keyword: String!): [CoffeeShop]\n  }\n"])));
 
 exports["default"] = _default;

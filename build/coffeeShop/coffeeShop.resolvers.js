@@ -58,6 +58,26 @@ var _default = {
           }
         }
       });
+    },
+    categories: function categories(_ref3) {
+      var id = _ref3.id;
+      return _client["default"].category.findMany({
+        where: {
+          shops: {
+            some: {
+              id: id
+            }
+          }
+        }
+      });
+    },
+    user: function user(_ref4) {
+      var userId = _ref4.userId;
+      return _client["default"].user.findUnique({
+        where: {
+          id: userId
+        }
+      });
     }
   }
 };

@@ -93,7 +93,7 @@ var protectedResolver = function protectedResolver(ourResolver) {
       };
     }
 
-    console.log("login complete");
+    console.log("auth complete");
     return ourResolver(root, args, context, info);
   };
 };

@@ -3,7 +3,7 @@ import client from "../../client";
 import { protectedResolver } from "../users.utils";
 import { createWriteStream } from "fs";
 import { GraphQLUpload } from "graphql-upload";
-import { uploadToS3 } from "../../../shared/shared.utils";
+import { uploadToS3 } from "../../shared/shared.utils";
 
 export default {
   Upload: GraphQLUpload,

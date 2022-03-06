@@ -21,13 +21,14 @@ var _fs = require("fs");
 
 var _graphqlUpload = require("graphql-upload");
 
+var _shared = require("../../shared/shared.utils");
+
 var _default = {
   Upload: _graphqlUpload.GraphQLUpload,
   Mutation: {
     editProfile: (0, _users.protectedResolver)( /*#__PURE__*/function () {
       var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(_, _ref, _ref2) {
-        var username, email, name, location, newPassword, avatar, githubUsername, loggedInUser, avatarUrl, _yield$avatar, filename, createReadStream, newFilename, readStream, writeStream, uglyPassword, updatedUser;
-
+        var username, email, name, location, newPassword, avatar, githubUsername, loggedInUser, avatarUrl, uglyPassword, updatedUser;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -37,39 +38,32 @@ var _default = {
                 avatarUrl = null;
 
                 if (!avatar) {
-                  _context.next = 14;
+                  _context.next = 7;
                   break;
                 }
 
                 _context.next = 6;
-                return avatar;
+                return (0, _shared.uploadToS3)(avatar, loggedInUser.id, "avatars");
 
               case 6:
-                _yield$avatar = _context.sent;
-                filename = _yield$avatar.filename;
-                createReadStream = _yield$avatar.createReadStream;
-                newFilename = "".concat(loggedInUser.id, "-").concat(Date.now(), "-").concat(filename);
-                readStream = createReadStream();
-                writeStream = (0, _fs.createWriteStream)(process.cwd() + "/uploads/" + newFilename);
-                readStream.pipe(writeStream);
-                avatarUrl = "http://localhost:4000/static/".concat(newFilename);
+                avatarUrl = _context.sent;
 
-              case 14:
+              case 7:
                 uglyPassword = null;
 
                 if (!newPassword) {
-                  _context.next = 19;
+                  _context.next = 12;
                   break;
                 }
 
-                _context.next = 18;
+                _context.next = 11;
                 return _bcrypt["default"].hash(newPassword, 10);
 
-              case 18:
+              case 11:
                 uglyPassword = _context.sent;
 
-              case 19:
-                _context.next = 21;
+              case 12:
+                _context.next = 14;
                 return _client["default"].user.update({
                   where: {
                     id: loggedInUser.id
@@ -85,11 +79,11 @@ var _default = {
                   }
                 });
 
-              case 21:
+              case 14:
                 updatedUser = _context.sent;
 
                 if (!updatedUser.id) {
-                  _context.next = 26;
+                  _context.next = 19;
                   break;
                 }
 
@@ -97,13 +91,13 @@ var _default = {
                   ok: true
                 });
 
-              case 26:
+              case 19:
                 return _context.abrupt("return", {
                   ok: false,
                   error: "Could not update profile."
                 });
 
-              case 27:
+              case 20:
               case "end":
                 return _context.stop();
             }

@@ -7,15 +7,18 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _client = _interopRequireDefault(require("../../client"));
+var _client = _interopRequireDefault(require("./../../client"));
 
 var _default = {
   Query: {
-    seeCoffeeShops: function seeCoffeeShops(_, _ref) {
-      var offset = _ref.offset;
+    searchCoffeeShops: function searchCoffeeShops(_, _ref) {
+      var keyword = _ref.keyword;
       return _client["default"].coffeeShop.findMany({
-        take: 2,
-        skip: offset
+        where: {
+          name: {
+            contains: "".concat(keyword)
+          }
+        }
       });
     }
   }

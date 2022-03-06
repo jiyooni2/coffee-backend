@@ -66,6 +66,7 @@ var apollo = new _apolloServerExpress.ApolloServer({
 var app = (0, _express["default"])();
 app.use((0, _morgan["default"])("dev"));
 app.use("static", _express["default"]["static"]("uploads"));
+app.use((0, _graphqlUpload.graphqlUploadExpress)());
 apollo.start().then(function () {
   apollo.applyMiddleware({
     app: app,
