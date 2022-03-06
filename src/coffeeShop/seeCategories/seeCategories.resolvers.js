@@ -2,10 +2,10 @@ import client from "./../../client";
 
 export default {
   Query: {
-    seeCategories: (_, { page }) => {
+    seeCategories: (_, { offset }) => {
       return client.category.findMany({
-        take: 5,
-        skip: (page - 1) * 5,
+        take: 10,
+        skip: offset,
       });
     },
   },
